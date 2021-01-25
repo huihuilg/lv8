@@ -28,5 +28,6 @@ Route::group([
     Route::post('logout',  [\App\Http\Controllers\AuthController::class, 'loginout']);
     Route::post('refresh',  [\App\Http\Controllers\AuthController::class, 'refresh']);
     Route::post('me',  [\App\Http\Controllers\AuthController::class, 'me']);
+    Route::post('userinfo',  [\App\Http\Controllers\AuthController::class, 'userinfo']);
 
 });

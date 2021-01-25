@@ -71,7 +71,12 @@ class AuthController extends Controller
      */
     public function refresh()
     {
-        return $this->respondWithToken(auth()->refresh());
+        try {
+            $token = auth()->refresh();
+        }catch (\Exception $e){
+            return $this->fail($e->getMessage());
+        }
+        return $this->respondWithToken($token);
     }
 
     /**
@@ -96,8 +101,8 @@ class AuthController extends Controller
      * Date: 2021/1/23
      * Time: 10:27 下午
      */
-    public function userInfo()
+    public function userInfo(Request $request)
     {
-
+       return auth()->user();
     }
 }
