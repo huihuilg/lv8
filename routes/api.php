@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 //Route::middleware('auth:sanctum')->get('/User', function (Request $request) {
 //    return $request->user();
 //});
+Route::get('test', [\App\Http\Controllers\TestController::class, 'test']);
 Route::group([
 
     'middleware' => 'api',
@@ -31,3 +32,5 @@ Route::group([
     Route::post('userinfo',  [\App\Http\Controllers\AuthController::class, 'userinfo']);
 
 });
+
+

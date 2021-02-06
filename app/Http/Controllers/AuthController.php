@@ -49,6 +49,7 @@ class AuthController extends Controller
      */
     public function me()
     {
+        echo 1;
         return response()->json(auth()->user());
     }
 
