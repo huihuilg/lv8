@@ -19,6 +19,6 @@ class TestController extends Controller
     {
         echo 11;
         echo 1;
-        
+        echo 2;
     }
 }
