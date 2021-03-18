@@ -18,8 +18,6 @@ class TestController extends Controller
     public function test(Request $request)
     {
         echo 11;
-        echo 1;
-        echo 2;
-        echo 3;
+
     }
 }
