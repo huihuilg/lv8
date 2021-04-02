@@ -32,7 +32,7 @@ class AuthController extends Controller
         if(!$user){
             return $this->success('用户不存在');
         }
-        if (Hash::check(request('password'), $user->password)) {
+        if (!Hash::check(request('password'), $user->password)) {
             return $this->success('密码错误');
         }
         if (! $token = auth()->login($user)) {

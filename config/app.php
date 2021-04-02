@@ -123,6 +123,13 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
+    //异常日志报警器配置
+    'error_log_monitor' => [
+        'error_notice_enabled' => env('ERROR_NOTICE_ENABLED', false),// 异常报警开关
+        'error_notice_limit' => env('ERROR_NOTICE_LIMIT', 30), // 异常日志报警频率（相同的异常多少时间内不再重复通知）
+        'error_ding_notice_token' => env('ERROR_NOTICE_TOKEN', ''), // 钉钉
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers

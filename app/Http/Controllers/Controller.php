@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\ResponseCode;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -15,12 +16,11 @@ class Controller extends BaseController
      * $msg   返回提示消息
      * $data  返回数据
      */
-    public function success($msg,$data = [])
+    public function success($data = null)
     {
         return response()->json([
-            'status' => true,
-            'code' => 200,
-            'message' => $msg,
+            'code' => ResponseCode::SUCCESS['code'],
+            'message' => ResponseCode::SUCCESS['message'],
             'data' => $data,
         ]);
     }
@@ -30,12 +30,11 @@ class Controller extends BaseController
      * $msg   返回提示消息
      * $data  返回数据
      */
-    public function fail($msg,$data = [])
+    public function fail($data = null)
     {
         return response()->json([
-            'status' => false,
-            'code' => 501,
-            'message' => $msg,
+            'code' => ResponseCode::FAIL['code'],
+            'message' => ResponseCode::FAIL['message'],
             'data' => $data,
         ]);
     }

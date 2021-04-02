@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Api\User;
 
 
 use App\Http\Controllers\Controller;
@@ -33,6 +33,10 @@ class UserController extends Controller
      */
     public function login(Request $request)
     {
-        return $request->all();
+        $this->validate($request, [
+            'email' => 'required',
+            'password' => 'required|min:6',
+        ]);
+        return $this->success();
     }
 }

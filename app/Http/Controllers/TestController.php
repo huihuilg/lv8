@@ -4,6 +4,8 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\User;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
 
 class TestController extends Controller
@@ -17,7 +19,6 @@ class TestController extends Controller
      */
     public function test(Request $request)
     {
-        echo 11;
-        echo 2;
+
     }
 }
