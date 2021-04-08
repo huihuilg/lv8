@@ -46,3 +46,14 @@ if (!function_exists('array_format_tree')) {
 }
 
 
+if (!function_exists('throw_response_code')) {
+    function throw_response_code(string $responseMessage = 'System error', int $responseCode = 10001, $data = null)
+    {
+        if (trim($responseMessage) == "") {
+            throw new \Exception('Unknown response message!');
+        }
+        throw new \App\Exceptions\ResponseCodeException($responseMessage, $responseCode, $data);
+    }
+}
+
+

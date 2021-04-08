@@ -8,8 +8,17 @@ use Illuminate\Support\Facades\DB;
 
 class BaseService
 {
+    /**
+     * @var $instance
+     */
     protected static $instance;
 
+    /**
+     * Notes: 单例禁止克隆
+     * User: hui
+     * Date: 2021/4/8
+     * Time: 6:50 下午
+     */
     private function __clone()
     {
 
