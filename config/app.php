@@ -186,6 +186,8 @@ return [
 
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
 
+        \App\Providers\WeatherServiceProvider::class
+
     ],
 
     /*
