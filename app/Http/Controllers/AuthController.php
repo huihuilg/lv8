@@ -30,16 +30,19 @@ class AuthController extends Controller
         // 使用辅助函数
         $user = User::query()->where(['email' => request('email')])->first();
         if(!$user){
-            return $this->success('用户不存在');
+            return $this->fail('用户不存在');
         }
         if (!Hash::check(request('password'), $user->password)) {
-            return $this->success('密码错误');
+            return $this->fail('密码错误');
         }
         if (! $token = auth()->login($user)) {
-            return $this->success('授权失败');
+            return $this->fail('授权失败');
         }
-
-        return $this->respondWithToken($token);
+        return $this->success([
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth()->factory()->getTTL() * 60
+        ]);
     }
 
     /**
@@ -49,8 +52,7 @@ class AuthController extends Controller
      */
     public function me()
     {
-        echo 1;
-        return response()->json(auth()->user());
+        return $this->success(auth()->user());
     }
 
     /**
@@ -61,8 +63,7 @@ class AuthController extends Controller
     public function logout()
     {
         auth()->logout();
-
-        return response()->json(['message' => 'Successfully logged out']);
+        return $this->success();
     }
 
     /**
@@ -77,25 +78,13 @@ class AuthController extends Controller
         }catch (\Exception $e){
             return $this->fail($e->getMessage());
         }
-        return $this->respondWithToken($token);
-    }
-
-    /**
-     * Get the token array structure.
-     *
-     * @param  string $token
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    protected function respondWithToken($token)
-    {
-        return response()->json([
+        return $this->success([
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60
         ]);
-        echo 11;
     }
+
 
     /**
      * Notes: 获取用户信息

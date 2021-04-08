@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Filterable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -13,11 +14,13 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
 {
-    use HasApiTokens;
-    use HasFactory;
-    use HasProfilePhoto;
-    use Notifiable;
-    use TwoFactorAuthenticatable;
+//    use HasApiTokens;
+//    use HasFactory;
+//    use HasProfilePhoto;
+//    use Notifiable;
+//    use TwoFactorAuthenticatable;
+
+    use Filterable;
 
     /**
      * The attributes that are mass assignable.
@@ -37,9 +40,7 @@ class User extends Authenticatable implements JWTSubject
      */
     protected $hidden = [
         'password',
-        'remember_token',
-        'two_factor_recovery_codes',
-        'two_factor_secret',
+        'deleted_at'
     ];
 
     /**

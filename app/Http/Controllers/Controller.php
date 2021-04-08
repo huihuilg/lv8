@@ -30,12 +30,12 @@ class Controller extends BaseController
      * $msg   返回提示消息
      * $data  返回数据
      */
-    public function fail($data = null)
+    public function fail($msg = '')
     {
         return response()->json([
             'code' => ResponseCode::FAIL['code'],
-            'message' => ResponseCode::FAIL['message'],
-            'data' => $data,
+            'message' => $msg,
+            'data' => null,
         ]);
     }
 
