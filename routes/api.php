@@ -23,15 +23,20 @@ Route::get('test', [\App\Http\Controllers\TestController::class, 'test']);
 
 //登录
 Route::post('login', [\App\Http\Controllers\Api\Auth\AuthController::class, 'login']);
+
 //需要登录
 Route::group([
     'middleware' => ['api', 'auth.jwt'],
-    'prefix' => 'auth'
 ], function ($router) {
 
-    Route::post('logout',  [\App\Http\Controllers\Api\Auth\AuthController::class, 'loginout']);
-    Route::post('refresh',  [\App\Http\Controllers\Api\Auth\AuthController::class, 'refresh']);
-    Route::post('me',  [\App\Http\Controllers\Api\Auth\AuthController::class, 'me']);
+    //登录相关
+    Route::group(['prefix' => 'auth'], function() {
+        Route::post('logout',  [\App\Http\Controllers\Api\Auth\AuthController::class, 'loginout']);
+        Route::post('refresh',  [\App\Http\Controllers\Api\Auth\AuthController::class, 'refresh']);
+        Route::get('me',  [\App\Http\Controllers\Api\Auth\AuthController::class, 'me']);
+    });
+
+    
 
 });
 

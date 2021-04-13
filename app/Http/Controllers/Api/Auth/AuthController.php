@@ -66,16 +66,8 @@ class AuthController extends Controller
      */
     public function refresh()
     {
-        try {
-            $token = auth()->refresh();
-        }catch (\Exception $e){
-            return $this->fail($e->getMessage());
-        }
-        return $this->success([
-            'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
-        ]);
+        $data = AuthService::instance()->refresh();
+        return $this->success($data);
     }
 
 }

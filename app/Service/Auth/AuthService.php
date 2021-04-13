@@ -37,4 +37,25 @@ class AuthService extends BaseService
             'expires_in' => auth()->factory()->getTTL() * 60
         ];
     }
+
+    /**
+     * Notes: 刷新token
+     * User: hui
+     * Date: 2021/4/12
+     * Time: 2:15 下午
+     * @return mixed
+     */
+    public function refresh()
+    {
+        try {
+            $token = auth()->refresh();
+        }catch (\Exception $e){
+            throw_response_code($e->getMessage());
+        }
+        return [
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth()->factory()->getTTL() * 60
+        ];
+    }
 }
