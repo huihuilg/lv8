@@ -13,7 +13,7 @@ class CreateLRole extends Migration
      */
     public function up()
     {
-        Schema::table('l_role', function (Blueprint $table) {
+        Schema::create('l_role', function (Blueprint $table) {
             //
             $table->id();
             $table->integer('belongs_id')->default(0)->comment('角色上级所属id');
