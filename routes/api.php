@@ -17,19 +17,26 @@ use Illuminate\Support\Facades\Route;
 //Route::middleware('auth:sanctum')->get('/User', function (Request $request) {
 //    return $request->user();
 //});
+
+//测试方法
 Route::get('test', [\App\Http\Controllers\TestController::class, 'test']);
+
+//登录
+Route::post('login', [\App\Http\Controllers\Api\Auth\AuthController::class, 'login']);
+
+//需要登录
 Route::group([
-
-    'middleware' => 'api',
-    'prefix' => 'auth'
-
+    'middleware' => ['api', 'auth.jwt'],
 ], function ($router) {
 
-    Route::post('login', [\App\Http\Controllers\AuthController::class, 'login']);
-    Route::post('logout',  [\App\Http\Controllers\AuthController::class, 'loginout']);
-    Route::post('refresh',  [\App\Http\Controllers\AuthController::class, 'refresh']);
-    Route::post('me',  [\App\Http\Controllers\AuthController::class, 'me']);
-    Route::post('userinfo',  [\App\Http\Controllers\AuthController::class, 'userinfo']);
+    //登录相关
+    Route::group(['prefix' => 'auth'], function() {
+        Route::post('logout',  [\App\Http\Controllers\Api\Auth\AuthController::class, 'loginout']);
+        Route::post('refresh',  [\App\Http\Controllers\Api\Auth\AuthController::class, 'refresh']);
+        Route::get('me',  [\App\Http\Controllers\Api\Auth\AuthController::class, 'me']);
+    });
+
+    
 
 });
 
