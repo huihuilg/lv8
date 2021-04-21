@@ -11,6 +11,8 @@ class UserAdmin extends Authenticatable implements JWTSubject
 
     use Filterable;
 
+    const PREFIX_EMAIL_VERIFY = 'email_verify_code_';
+
     protected $table = 'l_user_admin';
 
     /**

@@ -4,8 +4,11 @@
 namespace App\Service\Common;
 
 
+use App\Jobs\SendMailJob;
+use App\Models\UserAdmin;
 use App\Service\BaseService;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Redis;
 
 class MailService extends BaseService
 {
@@ -18,11 +21,10 @@ class MailService extends BaseService
      */
     public function sendMail($toMail)
     {
-        $content = '这是一封的测试邮件.';
-        Mail::raw($content, function ($message) use ($toMail) {
-            $message->subject('[ 测试 ] 测试邮件SendMail - ' .date('Y-m-d H:i:s'));
-            $message->to($toMail);
-        });
+        $number = mt_rand(100000, 999999);
+        if(Redis::connection('default')->client()->set(UserAdmin::PREFIX_EMAIL_VERIFY.$toMail, $number, 100)){
+            SendMailJob::dispatch(['email' => $toMail, 'number' => $number]);
+        }
         return true;
     }
 }
