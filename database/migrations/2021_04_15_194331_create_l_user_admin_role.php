@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLRole extends Migration
+class CreateLUserAdminRole extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateLRole extends Migration
      */
     public function up()
     {
-        Schema::create('l_role', function (Blueprint $table) {
+        Schema::create('l_user_admin_role', function (Blueprint $table) {
             //
             $table->id();
             $table->integer('belongs_id')->default(0)->comment('角色上级所属id');
@@ -25,7 +25,7 @@ class CreateLRole extends Migration
             $table->softDeletes();
         });
 
-        \Illuminate\Support\Facades\DB::statement("ALTER TABLE l_role COMMENT='角色表'");
+        \Illuminate\Support\Facades\DB::statement("ALTER TABLE l_user_admin_role COMMENT='角色表'");
     }
 
     /**

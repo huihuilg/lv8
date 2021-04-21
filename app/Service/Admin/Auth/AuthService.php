@@ -1,10 +1,10 @@
 <?php
 
 
-namespace App\Service\Auth;
+namespace App\Service\Admin\Auth;
 
 
-use App\Models\User;
+use App\Models\UserAdmin;
 use App\Service\BaseService;
 use Illuminate\Support\Facades\Hash;
 
@@ -21,7 +21,7 @@ class AuthService extends BaseService
     public function login()
     {
         // 使用辅助函数
-        $user = User::query()->where(['email' => request('email')])->first();
+        $user = UserAdmin::query()->where(['email' => request('email')])->first();
         if(!$user){
             throw_response_code('用户不存在或密码错误');
         }

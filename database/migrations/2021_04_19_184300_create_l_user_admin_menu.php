@@ -13,7 +13,7 @@ class CreateLMenu extends Migration
      */
     public function up()
     {
-        Schema::create('l_menu', function (Blueprint $table) {
+        Schema::create('l_user_admin_menu', function (Blueprint $table) {
             //
             $table->id();
             $table->string('name', 128)->default('')->comment('菜单名');
@@ -27,7 +27,7 @@ class CreateLMenu extends Migration
             $table->softDeletes();
         });
 
-        \Illuminate\Support\Facades\DB::statement("ALTER TABLE l_menu COMMENT='权限表'");
+        \Illuminate\Support\Facades\DB::statement("ALTER TABLE l_user_admin_menu COMMENT='权限表'");
     }
 
     /**

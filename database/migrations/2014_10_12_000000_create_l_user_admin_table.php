@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLUserTable extends Migration
+class CreateLUserAdminTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateLUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('l_user', function (Blueprint $table) {
+        Schema::create('l_user_admin', function (Blueprint $table) {
             $table->id();
             $table->string('name',128)->default('');
             $table->string('email',128)->unique()->default('');
@@ -26,7 +26,7 @@ class CreateLUserTable extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
-        \Illuminate\Support\Facades\DB::statement("ALTER TABLE l_user COMMENT='用户表'");
+        \Illuminate\Support\Facades\DB::statement("ALTER TABLE l_user_admin COMMENT='用户表'");
     }
 
     /**

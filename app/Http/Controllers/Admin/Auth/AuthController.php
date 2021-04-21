@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Api\Auth;
+namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use App\Service\Auth\AuthService;
+use App\Models\UserAdmin;
+use App\Service\Admin\Auth\AuthService;
 use App\Service\Weather\Contracts\Weather;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;

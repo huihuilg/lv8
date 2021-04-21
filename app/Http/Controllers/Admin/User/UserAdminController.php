@@ -1,14 +1,14 @@
 <?php
 
 
-namespace App\Http\Controllers\Api\User;
+namespace App\Http\Controllers\Admin\User;
 
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
-class UserController extends Controller
+class UserAdminController extends Controller
 {
 
     /**

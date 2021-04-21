@@ -6,11 +6,12 @@ use App\Models\Traits\Filterable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable implements JWTSubject
+class UserAdmin extends Authenticatable implements JWTSubject
 {
 
-
     use Filterable;
+
+    protected $table = 'l_user_admin';
 
     /**
      * The attributes that are mass assignable.
@@ -21,6 +22,8 @@ class User extends Authenticatable implements JWTSubject
         'name',
         'email',
         'password',
+        'mobile',
+        'avatar'
     ];
 
     /**

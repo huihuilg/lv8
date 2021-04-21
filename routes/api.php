@@ -22,7 +22,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('test', [\App\Http\Controllers\TestController::class, 'test']);
 
 //登录
-Route::post('login', [\App\Http\Controllers\Api\Auth\AuthController::class, 'login']);
+Route::post('login', [\App\Http\Controllers\Admin\Auth\AuthController::class, 'login']);
+
+//公共
+Route::group(['prefix' => 'common'], function() {
+    Route::post('send_mail', [\App\Http\Controllers\Common\MailController::class, 'sendMail']);
+});
 
 //需要登录
 Route::group([
@@ -31,12 +36,12 @@ Route::group([
 
     //登录相关
     Route::group(['prefix' => 'auth'], function() {
-        Route::post('logout',  [\App\Http\Controllers\Api\Auth\AuthController::class, 'loginout']);
-        Route::post('refresh',  [\App\Http\Controllers\Api\Auth\AuthController::class, 'refresh']);
-        Route::get('me',  [\App\Http\Controllers\Api\Auth\AuthController::class, 'me']);
+        Route::post('logout',  [\App\Http\Controllers\Admin\Auth\AuthController::class, 'loginout']);
+        Route::post('refresh',  [\App\Http\Controllers\Admin\Auth\AuthController::class, 'refresh']);
+        Route::get('me',  [\App\Http\Controllers\Admin\Auth\AuthController::class, 'me']);
     });
 
-    
+
 
 });
 
