@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLRoleOfMenu extends Migration
+class CreateLUserAdminRoleOfMenu extends Migration
 {
     /**
      * Run the migrations.
@@ -31,6 +31,6 @@ class CreateLRoleOfMenu extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('l_role_of_menu');
+        Schema::dropIfExists('l_user_admin_role_of_menu');
     }
 }

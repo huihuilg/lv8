@@ -35,7 +35,7 @@ class CreateLUserAdminRole extends Migration
      */
     public function down()
     {
-        Schema::table('l_role', function (Blueprint $table) {
+        Schema::table('l_user_admin_role', function (Blueprint $table) {
             //
         });
     }

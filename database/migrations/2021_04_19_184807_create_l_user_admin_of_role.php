@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLUserOfRole extends Migration
+class CreateLUserAdminOfRole extends Migration
 {
     /**
      * Run the migrations.
@@ -31,6 +31,6 @@ class CreateLUserOfRole extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('l_user_of_role');
+        Schema::dropIfExists('l_user_admin_of_role');
     }
 }

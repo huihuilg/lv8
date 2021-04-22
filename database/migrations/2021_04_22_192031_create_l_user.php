@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLUserAdminTable extends Migration
+class CreateLUser extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateLUserAdminTable extends Migration
      */
     public function up()
     {
-        Schema::create('l_user_admin', function (Blueprint $table) {
+        Schema::create('l_user', function (Blueprint $table) {
             $table->id();
-            $table->string('name',128)->default('');
+            $table->string('name',128)->default('')->comment('昵称');
             $table->string('email',128)->unique()->default('');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('mobile', 24)->default('');
@@ -23,10 +23,13 @@ class CreateLUserAdminTable extends Migration
             $table->tinyInteger('status')->default(1)->comment('用户状态 1 启用 2 禁用');
             $table->tinyInteger('gender')->default(3)->comment('性别，1：男 2：女 3：未知');
             $table->string('avatar')->comment('头像图地址')->default('');
+            $table->string('open_id')->default('')->comment('微信open_id');
+            $table->string('union_id')->default('')->comment('微信union_id');
             $table->timestamps();
             $table->softDeletes();
         });
-        \Illuminate\Support\Facades\DB::statement("ALTER TABLE l_user_admin COMMENT='用户表'");
+
+        \Illuminate\Support\Facades\DB::statement("ALTER TABLE l_user COMMENT='应用用户表'");
     }
 
     /**
@@ -36,6 +39,6 @@ class CreateLUserAdminTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('l_user_admin');
+        Schema::dropIfExists('user');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLMenu extends Migration
+class CreateLUserAdminMenu extends Migration
 {
     /**
      * Run the migrations.
@@ -37,8 +37,6 @@ class CreateLMenu extends Migration
      */
     public function down()
     {
-        Schema::table('l_menu', function (Blueprint $table) {
-            //
-        });
+
     }
 }
