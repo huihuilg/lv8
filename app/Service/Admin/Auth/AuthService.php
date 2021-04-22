@@ -18,10 +18,10 @@ class AuthService extends BaseService
      * @return array
      * @throws \App\Exceptions\ResponseCodeException
      */
-    public function login()
+    public function login($email)
     {
         // 使用辅助函数
-        $user = UserAdmin::query()->where(['email' => request('email')])->first();
+        $user = UserAdmin::query()->where(['email' => $email])->first();
         if(!$user){
             throw_response_code('用户不存在或密码错误');
         }

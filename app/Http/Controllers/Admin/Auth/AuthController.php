@@ -34,7 +34,7 @@ class AuthController extends Controller
             'email' => 'required',
             'password' => 'required'
         ]);
-        $data = AuthService::instance()->login();
+        $data = AuthService::instance()->login($request->email);
         return $this->success($data);
     }
 
