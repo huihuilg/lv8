@@ -18,16 +18,11 @@ use Illuminate\Support\Facades\Route;
 //    return $request->user();
 //});
 
-//测试方法
-Route::get('test', [\App\Http\Controllers\TestController::class, 'test']);
 
 //登录
+Route::post('register', [\App\Http\Controllers\Admin\Auth\AuthController::class, 'register']);
 Route::post('login', [\App\Http\Controllers\Admin\Auth\AuthController::class, 'login']);
 
-//公共
-Route::group(['prefix' => 'common'], function() {
-    Route::post('send_mail', [\App\Http\Controllers\Common\MailController::class, 'sendMail']);
-});
 
 //需要登录
 Route::group([

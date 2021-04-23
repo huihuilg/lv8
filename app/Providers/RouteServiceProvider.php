@@ -57,6 +57,7 @@ class RouteServiceProvider extends ServiceProvider
     public function map()
     {
         $this->mapApiRoutes();
+        $this->mapCommonRoutes();
         $this->mapWebRoutes();
         $this->mapTestRoutes();	#调用上面的方法
     }
@@ -76,6 +77,15 @@ class RouteServiceProvider extends ServiceProvider
             ->middleware('api')
             ->namespace($this->namespace)
             ->group(base_path('routes/api.php'));
+    }
+
+    //common
+    protected function mapCommonRoutes()
+    {
+        Route::prefix('common')
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/common.php'));
     }
 
     //test
