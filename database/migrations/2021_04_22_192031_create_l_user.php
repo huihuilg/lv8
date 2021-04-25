@@ -23,7 +23,6 @@ class CreateLUser extends Migration
             $table->tinyInteger('status')->default(1)->comment('用户状态 1 启用 2 禁用');
             $table->tinyInteger('gender')->default(3)->comment('性别，1：男 2：女 3：未知');
             $table->string('avatar')->comment('头像图地址')->default('');
-            $table->string('open_id')->default('')->comment('微信open_id');
             $table->string('union_id')->default('')->comment('微信union_id');
             $table->timestamps();
             $table->softDeletes();
