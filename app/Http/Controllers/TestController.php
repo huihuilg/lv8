@@ -4,6 +4,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Jobs\TestJob;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
 
@@ -18,6 +19,6 @@ class TestController extends Controller
      */
     public function test(Request $request)
     {
-        echo 23;
+        TestJob::dispatch();
     }
 }
