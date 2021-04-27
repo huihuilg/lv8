@@ -3,13 +3,11 @@
 namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\UserAdmin;
 use App\Service\Admin\Auth\AuthService;
-use App\Service\Weather\Contracts\Weather;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Tymon\JWTAuth\JWTAuth;
-use Tymon\JWTAuth\JWTGuard;
+use Illuminate\Support\Facades\Auth;
+use Tymon\JWTAuth\Facades\JWTAuth;
+
 
 class AuthController extends Controller
 {
@@ -23,9 +21,20 @@ class AuthController extends Controller
 //        $this->middleware('jwt.auth', ['except' => ['login']]);
 //    }
 
-    public function register()
+    /**
+     * @desc 注册
+     * @param  Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function register(Request $request)
     {
-
+        $this->validate($request, [
+            'email' => 'required',
+            'password' => 'required'
+        ]);
+        $data = AuthService::instance()->register($request->all());
+        return $this->success($data);
     }
 
     /**
@@ -48,9 +57,9 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function me()
+    public function me(Request $request)
     {
-        return $this->success(auth()->user());
+        return $this->success(Auth::guard('web')->user());
     }
 
     /**
@@ -60,7 +69,7 @@ class AuthController extends Controller
      */
     public function logout()
     {
-        auth()->logout();
+        auth('web')->logout();
         return $this->success();
     }
 

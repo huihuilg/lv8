@@ -1,8 +1,6 @@
 <?php
 
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,13 +12,20 @@ use Inertia\Inertia;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//登录
+Route::post('register', [\App\Http\Controllers\Admin\Auth\AuthController::class, 'register']);
+Route::post('login', [\App\Http\Controllers\Admin\Auth\AuthController::class, 'login']);
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+
+Route::post('logout',  [\App\Http\Controllers\Admin\Auth\AuthController::class, 'logout']);
+Route::get('me',  [\App\Http\Controllers\Admin\Auth\AuthController::class, 'me']);
+//需要登录
+Route::group([
+    'middleware' => ['api', 'auth.jwt'],
+], function ($router) {
+
+
 });
+
+
 

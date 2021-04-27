@@ -22,7 +22,7 @@ class MailService extends BaseService
     public function sendMail($toMail)
     {
         $number = mt_rand(100000, 999999);
-        if(!Redis::connection()->set(UserAdmin::PREFIX_EMAIL_VERIFY.$toMail, $number, 100)){
+        if(!Redis::connection()->client()->set(UserAdmin::PREFIX_EMAIL_VERIFY.$toMail, 100, $number)){
             throw_response_code('验证码设置失败,请重试');
         }
 //        $content = '您的注册码为 ' . $number;
