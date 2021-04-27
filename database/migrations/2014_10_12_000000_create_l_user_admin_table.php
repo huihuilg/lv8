@@ -26,7 +26,7 @@ class CreateLUserAdminTable extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
-        \Illuminate\Support\Facades\DB::statement("ALTER TABLE l_user_admin COMMENT='用户表'");
+        \Illuminate\Support\Facades\DB::statement("ALTER TABLE l_user_admin COMMENT='后台用户表'");
     }
 
     /**
