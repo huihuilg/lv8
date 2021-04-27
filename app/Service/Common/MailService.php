@@ -25,12 +25,12 @@ class MailService extends BaseService
         if(!Redis::connection()->set(UserAdmin::PREFIX_EMAIL_VERIFY.$toMail, $number, 100)){
             throw_response_code('验证码设置失败,请重试');
         }
-        $content = '您的注册码为 ' . $number;
-        Mail::raw($content, function ($message) use ($toMail) {
-            $message->subject('用户注册' .date('Y-m-d H:i:s'));
-            $message->to($toMail);
-        });
-//            SendMailJob::dispatch(['email' => $toMail, 'number' => $number]);
+//        $content = '您的注册码为 ' . $number;
+//        Mail::raw($content, function ($message) use ($toMail) {
+//            $message->subject('用户注册' .date('Y-m-d H:i:s'));
+//            $message->to($toMail);
+//        });
+        SendMailJob::dispatch(['email' => $toMail, 'number' => $number]);
         return true;
     }
 }
