@@ -19,6 +19,6 @@ class TestController extends Controller
      */
     public function test(Request $request)
     {
-        TestJob::dispatch();
+        echo 1;
     }
 }
