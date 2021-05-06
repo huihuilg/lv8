@@ -7,6 +7,7 @@ use App\Service\Admin\Auth\AuthService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use Tymon\JWTAuth\JWT;
 
 
 class AuthController extends Controller
@@ -59,7 +60,9 @@ class AuthController extends Controller
      */
     public function me(Request $request)
     {
-        return $this->success(Auth::guard('web')->user());
+        dd($this->success(self::getUser()));
+//        return $this->success(Auth::guard('web')->user());
+
     }
 
     /**

@@ -12,6 +12,9 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+
+    private static $user;
+
     /**
      * $msg   返回提示消息
      * $data  返回数据
@@ -37,6 +40,28 @@ class Controller extends BaseController
             'message' => $msg,
             'data' => null,
         ]);
+    }
+
+
+    /**
+     * Notes: 全局设置用户
+     * @param $user
+     * @author huihu
+     */
+    public static function setUser($user)
+    {
+        self::$user = $user;
+        dd(self::$user->toArray());
+    }
+
+    /**
+     * Notes: 获取用户
+     * @return mixed
+     * @author huihu
+     */
+    public static function getUser()
+    {
+        return self::$user;
     }
 
 }

@@ -5,6 +5,6 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 
-//测试方法
+//测试
 Route::get('test', [\App\Http\Controllers\TestController::class, 'test']);
 

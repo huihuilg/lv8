@@ -26,7 +26,7 @@ class AuthService extends BaseService
         }
         $data['password'] = Hash::make($data['password']);
         if($userAdmin = UserAdmin::query()->create($data)) {
-            if (! $token = auth()->login($userAdmin)) {
+            if (! $token = auth('web')->login($userAdmin)) {
                 throw_response_code('授权失败');
             }
             return [
@@ -57,34 +57,12 @@ class AuthService extends BaseService
         if (!Hash::check(request('password'), $user->password)) {
             throw_response_code('用户不存在或密码错误');
         }
-        if (! $token = auth()->login($user)) {
+        if (! $token = $this->getToken()) {
             throw_response_code('授权失败');
         }
         return [
-            'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
+            'token' => $token,
         ];
     }
 
-    /**
-     * Notes: 刷新token
-     * User: hui
-     * Date: 2021/4/12
-     * Time: 2:15 下午
-     * @return mixed
-     */
-    public function refresh()
-    {
-        try {
-            $token = auth('web')->refresh();
-        }catch (\Exception $e){
-            throw_response_code($e->getMessage());
-        }
-        return [
-            'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
-        ];
-    }
 }
