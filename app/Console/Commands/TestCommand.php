@@ -81,6 +81,6 @@ djKCXncinwsBfA==
 //        dd($decrypted);
 $data = 'fdsa\\fsdarew-fsd+ewno+efw';
         $data = str_replace(["\\",'+','-'], ['%','_','.'], $data);
-        echo $data;
+        echo 1;
     }
 }
