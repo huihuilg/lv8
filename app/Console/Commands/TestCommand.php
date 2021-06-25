@@ -83,8 +83,5 @@ $data = 'fdsa\\fsdarew-fsd+ewno+efw';
         $data = str_replace(["\\",'+','-'], ['%','_','.'], $data);
         echo $data;
         echo 1;
-        echo 2;
-        echo 3;
-        echo 4;
     }
 }
