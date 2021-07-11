@@ -4,11 +4,11 @@
 namespace App\Http\Controllers\Admin\User;
 
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
-class UserAdminController extends Controller
+class UserAdminBaseController extends BaseController
 {
 
     /**

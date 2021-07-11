@@ -21,7 +21,8 @@ class UserAdmin extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name',
+        'user_name',
+        'nickname',
         'email',
         'password',
         'mobile',
@@ -67,12 +68,12 @@ class UserAdmin extends Authenticatable implements JWTSubject
     }
 
     /**
-     * Return a key value array, containing any custom claims to be added to the JWT.
+     * 额外在 JWT 载荷中增加的自定义内容
      *
      * @return array
      */
     public function getJWTCustomClaims()
     {
-        return [];
+        return ['role' => 'admin'];
     }
 }

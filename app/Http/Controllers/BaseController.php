@@ -6,14 +6,34 @@ use App\Http\ResponseCode;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+use Illuminate\Validation\ValidationException;
 
-class Controller extends BaseController
+class BaseController extends Controller
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
 
     private static $user;
+
+
+    /**
+     * Notes: 表单验证
+     * @param  Request  $request
+     * @param  array  $rules
+     * @param  array  $error
+     * @author huihu
+     * @throws \App\Exceptions\ResponseCodeException
+     */
+    final protected function valid(Request $request, $rules = [], $error = [])
+    {
+        try {
+            $request->validate($rules, $error);
+        } catch (ValidationException $e) {
+            throw_response_code($e->validator->errors()->first(), ResponseCode::FAIL['code'], json_encode($request->input()));
+        }
+    }
 
     /**
      * $msg   返回提示消息
@@ -51,7 +71,6 @@ class Controller extends BaseController
     public static function setUser($user)
     {
         self::$user = $user;
-        dd(self::$user->toArray());
     }
 
     /**
