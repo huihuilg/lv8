@@ -21,17 +21,3 @@ use Illuminate\Support\Facades\Route;
 
 
 
-
-//需要登录
-Route::group([
-    'middleware' => ['api', 'auth.jwt'],
-], function ($router) {
-    //登录相关
-    Route::group(['prefix' => 'auth'], function() {
-        Route::post('logout',  [\App\Http\Controllers\Admin\Auth\AuthController::class, 'loginout']);
-        Route::post('refresh',  [\App\Http\Controllers\Admin\Auth\AuthController::class, 'refresh']);
-        Route::get('me',  [\App\Http\Controllers\Admin\Auth\AuthController::class, 'me']);
-    });
-});
-
-

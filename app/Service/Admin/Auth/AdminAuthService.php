@@ -4,11 +4,14 @@
 namespace App\Service\Admin\Auth;
 
 
+use App\Enum\PlatformEnum;
 use App\Models\UserAdmin;
 use App\Service\BaseService;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use App\Service\Common\AuthService as CommonAuth;
 
-class AuthService extends BaseService
+class AdminAuthService extends BaseService
 {
 
 
@@ -20,19 +23,23 @@ class AuthService extends BaseService
      */
     public function register(array $data)
     {
-        $userAdmin = UserAdmin::query()->where(['email' => $data['email']])->first();
+        $userAdmin = UserAdmin::query()->where(['user_name' => $data['user_name']])->first();
         if($userAdmin){
-            throw_response_code('邮箱已存在');
+            throw_response_code('账号已存在');
         }
         $data['password'] = Hash::make($data['password']);
+        DB::beginTransaction();
         if($userAdmin = UserAdmin::query()->create($data)) {
-            if (! $token = auth('web')->login($userAdmin)) {
+            if (! $token = CommonAuth::instance()->login($userAdmin,
+                CommonAuth::TOKEN_ACTIVE_CACHE_TTL,
+             PlatformEnum::ADMIN)) {
                 throw_response_code('授权失败');
             }
+
+            DB::commit();
             return [
-                'access_token' => $token,
-                'token_type' => 'bearer',
-                'expires_in' => auth()->factory()->getTTL() * 60
+                'token' => $token,
+                'expires_in' => CommonAuth::TOKEN_ACTIVE_CACHE_TTL - 1
             ];
         }else {
             throw_response_code('注册失败');
@@ -47,21 +54,24 @@ class AuthService extends BaseService
      * @return array
      * @throws \App\Exceptions\ResponseCodeException
      */
-    public function login($email)
+    public function login($userName)
     {
         // 使用辅助函数
-        $user = UserAdmin::query()->where(['email' => $email])->first();
-        if(!$user){
+        $userAdmin = UserAdmin::query()->where(['user_name' => $userName])->first();
+        if(!$userAdmin){
             throw_response_code('用户不存在或密码错误');
         }
-        if (!Hash::check(request('password'), $user->password)) {
+        if (!Hash::check(request('password'), $userAdmin->password)) {
             throw_response_code('用户不存在或密码错误');
         }
-        if (! $token = $this->getToken()) {
+        if (! $token = CommonAuth::instance()->login($userAdmin,
+            CommonAuth::TOKEN_ACTIVE_CACHE_TTL,
+            PlatformEnum::ADMIN)) {
             throw_response_code('授权失败');
         }
         return [
             'token' => $token,
+            'expires_in' => CommonAuth::TOKEN_ACTIVE_CACHE_TTL - 1
         ];
     }
 

@@ -65,9 +65,9 @@ class RouteServiceProvider extends ServiceProvider
     //web后台
     protected function mapWebRoutes()
     {
-        Route::middleware('web')
+        Route::middleware('admin')
             ->namespace($this->namespace)
-            ->group(base_path('routes/web.php'));
+            ->group(base_path('routes/admin.php'));
     }
 
     //api
