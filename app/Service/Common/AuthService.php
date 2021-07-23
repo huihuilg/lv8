@@ -6,10 +6,8 @@
  * Time: 20:37
  */
 
-namespace App\Service\User;
+namespace App\Service\Common;
 
-use App\Enum\User\UserLoginPlatformEnum;
-use App\Model\User\User;
 use App\Service\BaseService;
 use App\Service\Common\Rsa\Rsa;
 use Illuminate\Support\Facades\Redis;
@@ -24,7 +22,7 @@ class AuthService extends BaseService
     /**
      *  token 有效期
      */
-    const TOKEN_ACTIVE_CACHE_TTL = 64800;
+    const TOKEN_ACTIVE_CACHE_TTL = 86400;
 
     /**
      * 登录获取token
@@ -43,7 +41,7 @@ class AuthService extends BaseService
      * @return mixed
      * @throws \App\Exceptions\ResponseCodeException
      */
-    private function generateToken($user, int $ttl, $platform = 'web')
+    private function generateToken($user, int $ttl, int $platform)
     {
         if ($ttl < 10) {
             throw_response_code("登录有效期异常");

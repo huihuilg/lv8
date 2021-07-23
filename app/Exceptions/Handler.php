@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use App\Http\ResponseCode;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -52,13 +53,18 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $e)
     {
+        if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException) {
+            return response()->json([
+                "code" => ResponseCode::NOT_LOGIN['code'],
+                'message' => 'token过期请刷新'
+            ]);
+        }
         //系统异常
         if ($e instanceof ResponseCodeException) {
             return response()->json([
                 'code' => $e->responseCode,
                 'message' => $e->responseMessage,
-                'data' => $e->data,
-                'info' => $e->info]);
+                'data' => $e->data]);
         }
         //错误异常
         if(config('app.error_log_monitor.error_notice_enabled')){

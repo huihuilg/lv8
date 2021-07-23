@@ -2,8 +2,10 @@
 
 namespace App\Http;
 
-use App\Http\Middleware\LoginAuth;
+use App\Http\Middleware\AdminAuth;
+use App\Http\Middleware\MainAuth;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Tymon\JWTAuth\Http\Middleware\RefreshToken;
 
 class Kernel extends HttpKernel
 {
@@ -30,7 +32,7 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middlewareGroups = [
-        'web' => [
+        'admin' => [
 //            \App\Http\Middleware\EncryptCookies::class,
 //            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
 //            \Illuminate\Session\Middleware\StartSession::class,
@@ -63,7 +65,7 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'jwt.auth' => \Tymon\JWTAuth\Http\Middleware\Authenticate::class,
-        'web.auth' => LoginAuth::class,
+        'main.auth' => MainAuth::class,
+        'admin.auth' => AdminAuth::class,
     ];
 }

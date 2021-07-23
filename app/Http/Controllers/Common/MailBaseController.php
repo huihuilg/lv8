@@ -4,11 +4,11 @@
 namespace App\Http\Controllers\Common;
 
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 use App\Service\Common\MailService;
 use Illuminate\Http\Request;
 
-class MailController extends Controller
+class MailBaseController extends BaseController
 {
     /**
      * Notes: 发送邮箱
