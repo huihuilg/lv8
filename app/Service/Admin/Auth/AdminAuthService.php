@@ -23,14 +23,14 @@ class AdminAuthService extends BaseService
      */
     public function register(array $data)
     {
-        $userAdmin = UserAdmin::query()->where(['user_name' => $data['user_name']])->first();
+        $userAdmin = UserAdmin::query()->where('user_name', $data['user_name'])->first();
         if($userAdmin){
             throw_response_code('账号已存在');
         }
         $data['password'] = Hash::make($data['password']);
         DB::beginTransaction();
         if($userAdmin = UserAdmin::query()->create($data)) {
-            if (! $token = CommonAuth::instance()->login($userAdmin,
+            if (! $token = app(CommonAuth::class)->login($userAdmin,
                 CommonAuth::TOKEN_ACTIVE_CACHE_TTL,
              PlatformEnum::ADMIN)) {
                 throw_response_code('授权失败');
@@ -57,14 +57,14 @@ class AdminAuthService extends BaseService
     public function login($userName)
     {
         // 使用辅助函数
-        $userAdmin = UserAdmin::query()->where(['user_name' => $userName])->first();
+        $userAdmin = UserAdmin::query()->where('user_name', $userName)->first();
         if(!$userAdmin){
             throw_response_code('用户不存在或密码错误');
         }
         if (!Hash::check(request('password'), $userAdmin->password)) {
             throw_response_code('用户不存在或密码错误');
         }
-        if (! $token = CommonAuth::instance()->login($userAdmin,
+        if (! $token = app(CommonAuth::class)->login($userAdmin,
             CommonAuth::TOKEN_ACTIVE_CACHE_TTL,
             PlatformEnum::ADMIN)) {
             throw_response_code('授权失败');

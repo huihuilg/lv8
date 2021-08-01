@@ -17,7 +17,7 @@ class AdminAuthController extends BaseController
      * @return \Illuminate\Http\JsonResponse
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function register(Request $request)
+    public function register(Request $request, AdminAuthService $adminAuthService)
     {
         $this->valid($request, [
             'user_name' => 'required',
@@ -26,7 +26,7 @@ class AdminAuthController extends BaseController
         'user_name.required' => '用户名不能为空',
             'password.required' => '密码不能为空'
         ]);
-        $data = AdminAuthService::instance()->register($request->all());
+        $data = $adminAuthService->register($request->all());
         return $this->success($data);
     }
 
@@ -35,7 +35,7 @@ class AdminAuthController extends BaseController
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function login(Request $request)
+    public function login(Request $request, AdminAuthService $adminAuthService)
     {
         $this->valid($request, [
             'user_name' => 'required',
@@ -44,7 +44,7 @@ class AdminAuthController extends BaseController
             'user_name.required' => '用户名不能为空',
             'password.required' => '密码不能为空'
         ]);
-        $data = AdminAuthService::instance()->login($request->user_name);
+        $data = $adminAuthService->login($request->user_name);
         return $this->success($data);
     }
 

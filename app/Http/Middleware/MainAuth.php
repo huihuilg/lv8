@@ -25,7 +25,7 @@ class MainAuth
      */
     public function handle(Request $request, Closure $next)
     {
-        $tokenData = AuthService::instance()->analyticToken($request->header('token'));
+        $tokenData = app(AuthService::class)->analyticToken($request->header('token'));
 
         if(!$tokenData || $tokenData['ttl'] < Carbon::parse()->timestamp) {
             throw_response_code('请重新登录');
@@ -33,7 +33,7 @@ class MainAuth
 
         switch ($tokenData['platform']) {
             case PlatformEnum::ADMIN:
-                BaseController::setUser(UserAdminService::instance()->find($tokenData['user_id']));
+                BaseController::setUser(app(UserAdminService::class)->find($tokenData['user_id']));
                 break;
             default:
                 throw_response_code('登录平台不存在');

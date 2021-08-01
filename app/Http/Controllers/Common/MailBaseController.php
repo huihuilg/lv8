@@ -17,9 +17,9 @@ class MailBaseController extends BaseController
      * Time: 11:30 上午
      * @return \Illuminate\Http\JsonResponse
      */
-    public function sendMail(Request $request)
+    public function sendMail(Request $request, MailService $mailService)
     {
-        MailService::instance()->sendMail($request->input('email'));
+        $mailService->sendMail($request->input('email'));
         return $this->success();
     }
 }
