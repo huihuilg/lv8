@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Models;
+namespace App\Models\User\User;
 
 
 use App\Models\Traits\Filterable;

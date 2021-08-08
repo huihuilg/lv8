@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TestBaseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 //    return $request->user();
 //});
 
+//Route::any('test',[\App\Http\Controllers\TestBaseController::class,'test']);
+Route::resource('test',TestBaseController::class);
 
 
 

@@ -3,9 +3,7 @@
 
 namespace App\Http\Controllers;
 
-
-use App\Jobs\TestJob;
-use Illuminate\Http\Exceptions\HttpResponseException;
+use App\Models\User\UserAdmin;
 use Illuminate\Http\Request;
 
 class TestBaseController extends BaseController
@@ -17,8 +15,13 @@ class TestBaseController extends BaseController
      * Time: 5:39 下午
      * @param Request $request
      */
-    public function test(Request $request)
+    public function index(Request $request)
     {
-       echo 1;
+        return UserAdmin::query()->whereHas('userAdminOfRole', function ($query) {
+            $query->where('id', 3);
+        })
+            ->where('created_at', '2020-01-01')
+            ->where('nickname','like', '%'.'a'.'%')
+            ->get();
     }
 }
