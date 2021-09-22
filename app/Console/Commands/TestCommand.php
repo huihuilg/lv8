@@ -86,6 +86,6 @@ class TestCommand extends Command
 //        $data = str_replace(["\\",'+','-'], ['%','_','.'], $data);
 //        echo $data;
 //        echo 1;
-//        echo 2;
+        echo 2;
     }
 }
