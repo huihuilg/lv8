@@ -14,6 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+//登录
+Route::post('register', [\App\Http\Controllers\Api\Auth\UserController::class, 'register']);
+Route::any('login', [\App\Http\Controllers\Api\Auth\UserController::class, 'login'])->name('login');
+Route::any('me', [\App\Http\Controllers\Api\Auth\UserController::class, 'me'])->name('me');
+
 //Route::middleware('auth:sanctum')->get('/User', function (Request $request) {
 //    return $request->user();
 //});

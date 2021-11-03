@@ -56,22 +56,25 @@ class AdminAuthService extends BaseService
      */
     public function login($userName)
     {
-        // 使用辅助函数
-        $userAdmin = UserAdmin::query()->where('user_name', $userName)->first();
-        if(!$userAdmin){
-            throw_response_code('用户不存在或密码错误');
-        }
-        if (!Hash::check(request('password'), $userAdmin->password)) {
-            throw_response_code('用户不存在或密码错误');
-        }
-        if (! $token = app(CommonAuth::class)->login($userAdmin,
-            CommonAuth::TOKEN_ACTIVE_CACHE_TTL,
-            PlatformEnum::ADMIN)) {
-            throw_response_code('授权失败');
-        }
+
+        $credentials = request(['user_name', 'password']);
+//        $userAdmin = UserAdmin::query()->where('user_name', $userName)->first();
+//        if(!$userAdmin){
+//            throw_response_code('用户不存在或密码错误');
+//        }
+//        if (!Hash::check(request('password'), $userAdmin->password)) {
+//            throw_response_code('用户不存在或密码错误');
+//        }
+//        if (! $token = app(CommonAuth::class)->login($userAdmin,
+//            CommonAuth::TOKEN_ACTIVE_CACHE_TTL,
+//            PlatformEnum::ADMIN)) {
+//            throw_response_code('授权失败');
+//        }
+        $token = auth('admin')->attempt($credentials);
         return [
             'token' => $token,
-            'expires_in' => CommonAuth::TOKEN_ACTIVE_CACHE_TTL - 1
+            'token_type' => 'bearer',
+            'expires_in' => auth('admin')->factory()->getTTL() * 60
         ];
     }
 

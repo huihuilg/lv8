@@ -53,12 +53,12 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $e)
     {
-        if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException) {
-            return response()->json([
-                "code" => ResponseCode::NOT_LOGIN['code'],
-                'message' => 'token过期请刷新'
-            ]);
-        }
+//        if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException) {
+//            return response()->json([
+//                "code" => ResponseCode::NOT_LOGIN['code'],
+//                'message' => 'token过期请刷新'
+//            ]);
+//        }
         //系统异常
         if ($e instanceof ResponseCodeException) {
             return response()->json([
