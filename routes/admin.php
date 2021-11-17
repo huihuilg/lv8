@@ -18,13 +18,13 @@ Route::any('/', function () {
 });
 
 //登录
-Route::post('register', [\App\Http\Controllers\Admin\Auth\AdminAuthController::class, 'register']);
-Route::any('login', [\App\Http\Controllers\Admin\Auth\AdminAuthController::class, 'login'])->name('login');
+Route::post('register', [\App\Http\Controllers\Admin\Auth\UserController::class, 'register']);
+Route::any('login', [\App\Http\Controllers\Admin\Auth\UserController::class, 'login'])->name('login');
 
 //需要登录
-Route::middleware(['main.auth', 'admin.auth'])->group(function () {
+Route::middleware(['admin.auth'])->group(function () {
     Route::group(['prefix' => 'user'], function() {
-        Route::post('me',  [\App\Http\Controllers\Admin\Auth\AdminAuthController::class, 'me']);
+        Route::post('me',  [\App\Http\Controllers\Admin\Auth\UserController::class, 'me']);
     });
 });
 
