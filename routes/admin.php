@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::any('/', function () {
-    echo phpinfo();
+    echo 1;
 });
 
 //登录
