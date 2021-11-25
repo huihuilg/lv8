@@ -19,7 +19,7 @@ Route::any('/', function () {
 
 //登录
 Route::post('register', [\App\Http\Controllers\Admin\Auth\AdminAuthController::class, 'register']);
-Route::any('login', [\App\Http\Controllers\Admin\Auth\AdminAuthController::class, 'login'])->name('login');
+Route::post('login', [\App\Http\Controllers\Admin\Auth\AdminAuthController::class, 'login'])->name('login');
 
 //需要登录
 Route::middleware(['main.auth', 'admin.auth'])->group(function () {
