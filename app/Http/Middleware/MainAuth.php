@@ -4,7 +4,6 @@ namespace App\Http\Middleware;
 
 use App\Enum\PlatformEnum;
 use App\Http\Controllers\BaseController;
-use App\Models\UserAdmin;
 use App\Service\Admin\User\UserAdminService;
 use App\Service\Common\AuthService;
 use Carbon\Carbon;

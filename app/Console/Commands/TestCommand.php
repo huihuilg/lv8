@@ -37,20 +37,8 @@ class TestCommand extends Command
      */
     public function handle()
     {
-        $a = [
-            ['id' => 1],
-            ['id' => 3],
-        ];
-        $c = [];
-
-
-
-        foreach ($a as &$v) {
-            $c[] = $v;
-            $v = 2;
-        }
-
-        dd($a, $c);
+        $a = '=/fsd/';
+        dump(str_replace(['/','s'],['1', '2'], $a));
 
         /**
          * 公钥加密
@@ -101,7 +89,5 @@ class TestCommand extends Command
         echo 2;
         echo 3;
         echo 4;
-        echo 5;
-        echo 7;
     }
 }
