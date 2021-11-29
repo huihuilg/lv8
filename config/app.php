@@ -186,8 +186,10 @@ return [
 
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
-        \App\Providers\WeatherServiceProvider::class,
+        App\Providers\WeatherServiceProvider::class,
 
+//        Laravel\Scout\ScoutServiceProvider::class,
+//        ScoutElastic\ScoutElasticServiceProvider::class,
     ],
 
     /*

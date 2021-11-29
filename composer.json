@@ -9,6 +9,9 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "ext-json": "*",
+        "ext-openssl": "*",
+        "babenkoivan/scout-elasticsearch-driver": "^4.3",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.3",
@@ -24,9 +27,7 @@
         "tymon/jwt-auth": "^1.0",
         "vladimir-yuldashev/laravel-queue-rabbitmq": "^11.2",
         "workerman/gateway-worker": "^3.0",
-        "workerman/gatewayclient": "^3.0",
-        "ext-openssl": "*",
-      "ext-json": "*"
+        "workerman/gatewayclient": "^3.0"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.10",
