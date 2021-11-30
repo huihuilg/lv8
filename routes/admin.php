@@ -29,4 +29,10 @@ Route::middleware(['main.auth', 'admin.auth'])->group(function () {
 });
 
 
+Route::get('test', [\App\Http\Controllers\TestController::class, 'test']);
+Route::any('commit', [\App\Http\Controllers\TestController::class, 'commit']);
+
+
+
+
 

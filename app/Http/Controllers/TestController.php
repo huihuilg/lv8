@@ -8,17 +8,22 @@ use App\Jobs\TestJob;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
 
-class TestBaseController extends BaseController
+class TestController extends BaseController
 {
     /**
      * Notes: 测试方法
      * User: hui
      * Date: 2021/1/23
      * Time: 5:39 下午
-     * @param Request $request
+     * @param  Request  $request
      */
     public function test(Request $request)
     {
-       echo 1;
+        return view('admin/test');
+    }
+
+    public function commit(Request $request)
+    {
+        session(['key' => 'fdsafsdafdsafwafds']);
     }
 }
