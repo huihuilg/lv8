@@ -21,22 +21,45 @@ class Goods extends Model
     protected $indexConfigurator = GoodsIndexConfigurator::class;
 
 
-
     protected $fillable = [
         'title',
         'content'
     ];
 
+    protected $casts = [
+        'content' => 'json'
+    ];
+
+
     protected $mapping = [
         'properties' => [
+            'id' => [
+                'type' => 'long',
+            ],
             'title' => [
                 'type' => 'text',
             ],
             'content' => [
-                'type' => 'text',
+                'properties' => [
+                    'address' => [
+                        'type' => 'text',
+                    ],
+                    'key_param' => [
+                        'type' => 'text'
+                    ],
+                    'plan_time' => [
+                        'type' => 'date',
+                        'format' => 'yyyy-MM-dd HH:mm:ss||yyyy-MM-dd||epoch_millis'
+                    ],
+                ]
             ],
-            'id' => [
-                'type' => '',
+            'created_at' => [
+                'type' => 'date',
+                'format' => 'yyyy-MM-dd HH:mm:ss||yyyy-MM-dd||epoch_millis'
+            ],
+            'updated_at' => [
+                'type' => 'date',
+                'format' => 'yyyy-MM-dd HH:mm:ss||yyyy-MM-dd||epoch_millis'
             ]
         ]
     ];
@@ -44,12 +67,23 @@ class Goods extends Model
 
     public function toSearchableArray()
     {
-        return [
-            'title' => $this->title,
-            'content' => strip_tags($this->content),
-        ];
+        $array = $this->toArray();
+
+        // Customize array...
+
+        return $array;
     }
 
+
+    public function getUpdatedAtAttribute($value)
+    {
+        return $value ? date("Y-m-d H:i:s", strtotime($value)) : '';
+    }
+
+    public function getCreatedAtAttribute($value)
+    {
+        return $value ? date("Y-m-d H:i:s", strtotime($value)) : '';
+    }
 
 
 }
