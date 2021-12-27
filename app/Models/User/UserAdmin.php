@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\User;
 
 use App\Models\Traits\Filterable;
+use App\Models\User\UserAdminOfRole;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
@@ -110,5 +111,10 @@ class UserAdmin extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return ['role' => 'admin'];
+    }
+
+    public function userAdminOfRole()
+    {
+        return $this->hasMany(UserAdminOfRole::class, 'user_admin_id');
     }
 }

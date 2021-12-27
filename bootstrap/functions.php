@@ -56,4 +56,21 @@ if (!function_exists('throw_response_code')) {
     }
 }
 
+function generateTree($list, $pk = 'id', $pid = 'pid', $child = 'children', $root = 0)
+{
+    $tree     = array();
+    $packData = array();
+    foreach ($list as $data) {
+        $packData[$data[$pk]] = $data;
+    }
+    foreach ($packData as $key => $val) {
+        if ($val[$pid] == $root) {
+            $tree[] = &$packData[$key];
+        } else {
+            $packData[$val[$pid]][$child][] = &$packData[$key];
+        }
+    }
+    return $tree;
+}
+
 
