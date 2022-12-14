@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Jobs\TestJob;
 use Illuminate\Console\Command;
 
 class TestCommand extends Command
@@ -37,8 +38,7 @@ class TestCommand extends Command
      */
     public function handle()
     {
-        $a = '=/fsd/';
-        dump(str_replace(['/','s'],['1', '2'], $a));
+        dispatch(new TestJob());
 
         /**
          * 公钥加密
@@ -85,9 +85,6 @@ class TestCommand extends Command
 //$data = 'fdsa\\fsdarew-fsd+ewno+efw';
 //        $data = str_replace(["\\",'+','-'], ['%','_','.'], $data);
 //        echo $data;
-        echo 1;
-        echo 2;
-        echo 3;
-        echo 4;
+
     }
 }

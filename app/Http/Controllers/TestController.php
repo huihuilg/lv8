@@ -4,8 +4,6 @@
 namespace App\Http\Controllers;
 
 
-use App\Jobs\TestJob;
-use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
 
 class TestController extends BaseController
@@ -24,6 +22,6 @@ class TestController extends BaseController
 
     public function commit(Request $request)
     {
-        session(['key' => 'fdsafsdafdsafwafds']);
+
     }
 }
