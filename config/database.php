@@ -91,6 +91,20 @@ return [
             'prefix_indexes' => true,
         ],
 
+        'elasticsearch' => [
+            'driver' => 'elasticsearch',
+            'hosts' => [
+                [
+                    'host' => env('ELASTICSEARCH_HOST', 'localhost'),
+                    'port' => env('ELASTICSEARCH_PORT', 9200),
+                    'scheme' => env('ELASTICSEARCH_SCHEME', null),
+                    'user' => env('ELASTICSEARCH_USER', null),
+                    'pass' => env('ELASTICSEARCH_PASS', null),
+                ],
+            ],
+            'logging' => env('ELASTICSEARCH_LOGGING', false),
+            'enabled' => env('ELASTICSEARCH_ENABLED', true),
+        ],
     ],
 
     /*

@@ -17,11 +17,9 @@ class TestController extends BaseController
      */
     public function test(Request $request)
     {
-        return view('admin/test');
+        dump('Hello');
+
+//        return view('admin/test');
     }
 
-    public function commit(Request $request)
-    {
-
-    }
 }

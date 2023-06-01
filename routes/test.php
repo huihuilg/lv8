@@ -6,5 +6,5 @@ use Inertia\Inertia;
 
 
 //测试
-Route::get('test', [\App\Http\Controllers\TestController::class, 'test']);
+Route::get('', [\App\Http\Controllers\TestController::class, 'test']);
 
